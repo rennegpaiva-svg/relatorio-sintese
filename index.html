@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentos • Relatório de Síntese</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
+        
+        :root {
+            --primary: #1E3A5F;
+            --secondary: #2E5A8C;
+            --accent: #4A90D9;
+            --light: #F8FAFC;
+            --text: #1E293B;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #F8FAFC;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+        
+        .search-bar {
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1.25rem;
+            display: flex;
+            align-items: center;
+            width: 320px;
+            box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+        }
+        
+        .search-bar input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(30, 58, 95, 0.85), rgba(30, 58, 95, 0.85)), url('https://picsum.photos/id/1015/2000/1200');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.95;
+        }
+        
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.75rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #E2E8F0;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+        }
+        
+        .card p {
+            color: #64748B;
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: #F1F5F9;
+        }
+        
+        .document-list {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05);
+        }
+        
+        .document-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.75rem;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        
+        .document-item:last-child {
+            border-bottom: none;
+        }
+        
+        .document-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .document-icon {
+            width: 42px;
+            height: 42px;
+            background: #E0E7FF;
+            color: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+        
+        .nav-menu a:hover {
+            opacity: 0.85;
+        }
+        
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 0 2rem;
+            font-size: 0.9rem;
+        }
+        
+        .purpose {
+            font-size: 0.875rem;
+            background: #F1F5F9;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-top: 0.75rem;
+        }
+        
+        .search-results {
+            position: absolute;
+            background: white;
+            width: 100%;
+            max-width: 320px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            margin-top: 0.5rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">Relatório de Síntese</div>
+                
+                <div style="position: relative;">
+                    <div class="search-bar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="#64748B" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </svg>
+                        <input type="text" id="searchInput" placeholder="Buscar documentos..." onkeyup="filterDocuments()">
+                    </div>
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#documentos">Documentos</a></li>
+                    <li><a href="#ajuda">Ajuda</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO / HOME -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Documentos para o<br>Relatório de Síntese</h1>
+            <p>Plataforma organizada para professores universitários acessarem e baixarem todos os formulários e documentos necessários para a elaboração do relatório.</p>
+            <a href="#documentos" class="btn" style="background: white; color: var(--primary); font-weight: 600; padding: 1rem 2rem;">
+                Acessar Documentos
+            </a>
+        </div>
+    </section>
+
+    <!-- DESCRIÇÃO GERAL -->
+    <section class="section container">
+        <div style="max-width: 780px; margin: 0 auto; text-align: center;">
+            <h2 class="section-title" style="margin-bottom: 1rem;">Bem-vindo ao portal</h2>
+            <p style="font-size: 1.1rem; color: #475569;">
+                Este site foi desenvolvido para facilitar o acesso aos documentos exigidos na confecção do Relatório de Síntese. 
+                Todos os materiais estão organizados por categoria, com explicações claras sobre sua finalidade.
+            </p>
+        </div>
+    </section>
+
+    <!-- SEÇÕES DE DOCUMENTOS -->
+    <section id="documentos" class="section container">
+        <h2 class="section-title">Documentos Disponíveis</h2>
+        
+        <div class="grid">
+            
+            <!-- 1. Plano de Ação -->
+            <div class="card">
+                <div class="document-info">
+                    <div class="document-icon">📋</div>
+                    <div>
+                        <h3>Plano de Ação (Formulário 1)</h3>
+                    </div>
+                </div>
+                <p class="purpose">Define as ações estratégicas e objetivos a serem alcançados durante o período de estágio.</p>
+                <a href="#" class="btn">Baixar PDF</a>
+                <a href="#" class="btn btn-secondary" style="margin-left: 0.5rem;">Visualizar</a>
+            </div>
+
+            <!-- 2. Cronograma -->
+            <div class="card">
+                <div class="document-info">
+                    <div class="document-icon">📅</div>
+                    <div>
+                        <h3>Cronograma das Atividades</h3>
+                    </div>
+                </div>
+                <p class="purpose">Planejamento temporal das atividades a serem realizadas na escola parceira.</p>
+                <a href="#" class="btn">Baixar PDF</a>
+                <a href="#" class="btn btn-secondary" style="margin-left: 0.5rem;">Visualizar</a>
+            </div>
+
+            <!-- 3. Documentos para Entrega -->
+            <div class="card">
+                <div class="document-info">
+                    <div class="document-icon">📁</div>
+                    <div>
+                        <h3>Documentos para Entrega na Escola</h3>
+                    </div>
+                </div>
+                <p class="purpose">Lista de documentos que devem ser entregues na escola, incluindo espaço para assinatura do gestor.</p>
+                <a href="#" class="btn">Baixar PDF</a>
+                <a href="#" class="btn btn-secondary" style="margin-left: 0.5rem;">Visualizar</a>
+            </div>
+
+            <!-- 4. Termo de Compromisso -->
+            <div class="card">
+                <div class="document-info">
+                    <div class="document-icon">✍️</div>
+                    <div>
+                        <h3>Termo de Compromisso</h3>
+                    </div>
+                </div>
+                <p class="purpose">Documento formal que estabelece os compromissos entre o estagiário, a instituição e a escola.</p>
+                <a href="#" class="btn">Baixar PDF</a>
+                <a href="#" class="btn btn-secondary" style="margin-left: 0.5rem;">Visualizar</a>
+            </div>
+
+            <!-- 5. Relatório de Observação -->
+            <div class="card">
+                <div class="document-info">
+                    <div class="document-icon">🔍</div>
+                    <div>
+                        <h3>Relatório de Observação (Formulário 2)</h3>
+                    </div>
+                </div>
+                <p class="purpose">Registro das observações realizadas em sala de aula durante o período de estágio.</p>
+                <a href="#" class="btn">Baixar PDF</a>
+                <a href="#" class="btn btn-secondary" style="margin-left: 0.5rem;">Visualizar</a>
+            </div>
+
+            <!-- 6. Análise do PPP -->
+            <div class="card">
+                <div class="document-info">
+                    <div class="document-icon">📖</div>
+                    <div>
+                        <h3>Relatório de Análise do PPP</h3>
+                    </div>
+                </div>
+                <p class="purpose">Análise crítica do Projeto Político-Pedagógico da escola parceira.</p>
+                <a href="#" class="btn">Baixar PDF</a>
+                <a href="#" class="btn btn-secondary" style="margin-left: 0.5rem;">Visualizar</a>
+            </div>
+
+            <!-- 7. Análise do Livro Didático -->
+            <div class="card">
+                <div class="document-info">
+                    <div class="document-icon">📚</div>
+                    <div>
+                        <h3>Análise do Livro Didático</h3>
+                    </div>
+                </div>
+                <p class="purpose">Avaliação dos materiais didáticos utilizados pela escola.</p>
+                <a href="#" class="btn">Baixar PDF</a>
+                <a href="#" class="btn btn-secondary" style="margin-left: 0.5rem;">Visualizar</a>
+            </div>
+
+            <!-- 8. Formulários Diversos -->
+            <div class="card">
+                <div class="document-info">
+                    <div class="document-icon">📝</div>
+                    <div>
+                        <h3>Formulários Diversos</h3>
+                    </div>
+                </div>
+                <p class="purpose">Conjunto de formulários complementares necessários para o relatório.</p>
+                <a href="#" class="btn">Baixar ZIP</a>
+                <a href="#" class="btn btn-secondary" style="margin-left: 0.5rem;">Visualizar</a>
+            </div>
+
+            <!-- 9. Relatório das Atividades -->
+            <div class="card">
+                <div class="document-info">
+                    <div class="document-icon">📊</div>
+                    <div>
+                        <h3>Relatório das Atividades (10-12 Regências)</h3>
+                    </div>
+                </div>
+                <p class="purpose">Registro detalhado das regências realizadas (entre 10 e 12 aulas).</p>
+                <a href="#" class="btn">Baixar PDF</a>
+                <a href="#" class="btn btn-secondary" style="margin-left: 0.5rem;">Visualizar</a>
+            </div>
+
+            <!-- 10. Fichas de Frequência -->
+            <div class="card">
+                <div class="document-info">
+                    <div class="document-icon">📋</div>
+                    <div>
+                        <h3>Fichas de Frequência</h3>
+                    </div>
+                </div>
+                <p class="purpose">Controle de frequência dos alunos durante as regências.</p>
+                <a href="#" class="btn">Baixar PDF</a>
+                <a href="#" class="btn btn-secondary" style="margin-left: 0.5rem;">Visualizar</a>
+            </div>
+
+            <!-- 11. Avaliação Final -->
+            <div class="card">
+                <div class="document-info">
+                    <div class="document-icon">✅</div>
+                    <div>
+                        <h3>Avaliação Final (Formulário)</h3>
+                    </div>
+                </div>
+                <p class="purpose">Formulário de avaliação final do estágio supervisionado.</p>
+                <a href="#" class="btn">Baixar PDF</a>
+                <a href="#" class="btn btn-secondary" style="margin-left: 0.5rem;">Visualizar</a>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- SEÇÃO DE AJUDA E ATUALIZAÇÃO -->
+    <section id="ajuda" class="section container" style="background: #F1F5F9; border-radius: 20px; padding: 3rem;">
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 3rem;">
+            
+            <div>
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Como atualizar os documentos</h3>
+                <ol style="padding-left: 1.25rem; line-height: 1.8; color: #475569;">
+                    <li>Acesse a área administrativa do Webnode</li>
+                    <li>Entre na seção “Páginas” e selecione a seção desejada</li>
+                    <li>Substitua o arquivo PDF atual pelo novo documento</li>
+                    <li>Atualize a data de revisão no rodapé da página</li>
+                    <li>Publique as alterações</li>
+                </ol>
+            </div>
+            
+            <div>
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Dicas de uso</h3>
+                <ul style="line-height: 1.8; color: #475569;">
+                    <li>Utilize a barra de busca para localizar documentos rapidamente</li>
+                    <li>Baixe os arquivos em PDF para preenchimento digital</li>
+                    <li>Organize os documentos em pastas no seu computador</li>
+                    <li>Verifique sempre a versão mais recente antes de usar</li>
+                </ul>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                    <p>© 2025 • Portal de Documentos do Relatório de Síntese</p>
+                    <p style="opacity: 0.7; font-size: 0.85rem;">Desenvolvido para uso acadêmico</p>
+                </div>
+                <div style="text-align: right;">
+                    <p>Última atualização: 22 de junho de 2026</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function filterDocuments() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('#documentos .card');
+            const resultsContainer = document.getElementById('searchResults');
+            
+            let resultsHTML = '';
+            
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                if (title.includes(input) && input.length > 1) {
+                    resultsHTML += `
+                        <div style="padding: 0.75rem 1rem; border-bottom: 1px solid #eee; cursor: pointer;" 
+                             onclick="document.getElementById('searchInput').value=''; document.getElementById('searchResults').style.display='none'; card.scrollIntoView({ behavior: 'smooth' })">
+                            ${card.querySelector('h3').textContent}
+                        </div>
+                    `;
+                }
+            });
+            
+            if (resultsHTML && input.length > 1) {
+                resultsContainer.innerHTML = resultsHTML;
+                resultsContainer.style.display = 'block';
+            } else {
+                resultsContainer.style.display = 'none';
+            }
+        }
+        
+        // Fechar resultados ao clicar fora
+        document.addEventListener('click', function(e) {
+            const searchResults = document.getElementById('searchResults');
+            if (!e.target.closest('.search-bar')) {
+                searchResults.style.display = 'none';
+            }
+        });
+        
+        // Scroll suave para seções
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
